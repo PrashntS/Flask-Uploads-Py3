@@ -3,3 +3,6 @@ Flask-Uploads
 It handles uploads. There's an example application in example/ that requires
 Flask-CouchDB. If you have nose installed, just run "nosetests" to run the
 tests.
+
+This is a Python 3 compatible version of Flask-Uploads hosted at
+https://bitbucket.org/leafstorm/flask-uploads/

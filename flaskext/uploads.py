@@ -5,6 +5,9 @@ flaskext.uploads
 This module provides upload support for Flask. The basic pattern is to set up
 an `UploadSet` object and upload your files to it.
 
+This is a Python 3 compatible version of Flask-Uploads hosted at
+https://bitbucket.org/leafstorm/flask-uploads/
+
 :copyright: 2010 Matthew "LeafStorm" Frazier
 :license:   MIT/X11, see LICENSE for details
 """
@@ -191,7 +194,7 @@ def configure_uploads(app, upload_sets):
     app. It will also register the uploads module if it hasn't been set. This
     can be called multiple times with different upload sets.
 
-    .. versionchanged:: 0.1.3
+    .. versionchanged:: 0.1.4
        The uploads module/blueprint will only be registered if it is needed
        to serve the upload sets.
 
@@ -211,7 +214,7 @@ def configure_uploads(app, upload_sets):
         config = config_for_set(uset, app, defaults)
         set_config[uset.name] = config
 
-    should_serve = any(s.base_url is None for s in set_config.itervalues())
+    should_serve = any(s.base_url is None for s in list(set_config.values()))
     if using_blueprints:
         if '_uploads' not in app.blueprints and should_serve:
             app.register_blueprint(uploads_mod)
@@ -494,7 +497,7 @@ class TestingFileStorage(FileStorage):
         :param dst: The file to save to.
         :param buffer_size: Ignored.
         """
-        if isinstance(dst, basestring):
+        if isinstance(dst, str):
             self.saved = dst
         else:
             self.saved = dst.name
